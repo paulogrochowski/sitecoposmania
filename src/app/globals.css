@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 48 96% 53%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 240 10% 3.9%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 240 4% 46%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 240 10% 3.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 48 96% 53%;
+    --chart-1: 48 96% 53%;
+    --chart-2: 197 37% 24%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 240 5% 12%;
+    --foreground: 0 0% 98%;
+    --card: 240 5% 16%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 48 96% 53%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 240 4% 20%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 4% 20%;
+    --input: 240 4% 18%;
+    --ring: 48 96% 53%;
+    --chart-1: 48 96% 53%;
+    --chart-2: 336 84% 61%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .checkerboard {
+    background-image:
+      linear-gradient(45deg, hsl(var(--muted)) 25%, transparent 25%),
+      linear-gradient(-45deg, hsl(var(--muted)) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, hsl(var(--muted)) 75%),
+      linear-gradient(-45deg, transparent 75%, hsl(var(--muted)) 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  }
+
+  .glass-left {
+    animation: clink-left 1.5s ease-in-out infinite;
+    transform-origin: 30px 95px;
+  }
+  .glass-right {
+    animation: clink-right 1.5s ease-in-out infinite;
+    transform-origin: 70px 95px;
+  }
+  .spark {
+    animation: spark-effect 1.5s ease-in-out infinite;
+    transform-origin: center;
+    opacity: 0;
+  }
+
+  @keyframes clink-left {
+    0%, 25%, 75%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-15deg); }
+  }
+  @keyframes clink-right {
+    0%, 25%, 75%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+  }
+  @keyframes spark-effect {
+    0%, 49%, 61%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+    60% { opacity: 0; transform: scale(0.5); }
+  }
+}
