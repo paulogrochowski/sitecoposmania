@@ -8,6 +8,7 @@ import { FooterMenuWrapper } from '@/components/footer-menu-wrapper';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { UserMenuWrapper } from '@/components/user-menu-wrapper';
+import { headers } from 'next/headers';
 
 const oswald = Oswald({
   subsets: ['latin'],
@@ -29,6 +30,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = headers().get('x-pathname');
+  const standalone = pathname?.startsWith('/gerar-3d') || pathname?.startsWith('/admin/gerar-3d');
 
   return (
     <html lang="pt-BR" suppressHydrationWarning>
@@ -40,14 +43,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AdminLoginModalProvider>
-            <div className="flex flex-col min-h-screen">
-              <Header>
-                <UserMenuWrapper />
-              </Header>
+            {standalone ? children : <div className="flex min-h-screen flex-col">
+              <Header><UserMenuWrapper /></Header>
               <main className="flex-1">{children}</main>
               <Footer />
               <FooterMenuWrapper />
-            </div>
+            </div>}
           </AdminLoginModalProvider>
           <Toaster />
         </ThemeProvider>
