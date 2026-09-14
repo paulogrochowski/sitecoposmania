@@ -21,7 +21,10 @@ export interface ProductInput {
   color: string;
   notes: string;
   objectTypes: string[];
-  imageIds: string[];
+  /** IDs used by the legacy/local upload flow. */
+  imageIds?: string[];
+  /** Compressed image data URIs used by cloud image-to-3D providers. */
+  imageUrls?: string[];
 }
 
 export interface Product extends ProductInput {
