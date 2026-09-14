@@ -55,7 +55,7 @@ async function readJson<T>(response: Response): Promise<TripoEnvelope<T>> {
 }
 
 function dataUriToBlob(dataUri: string) {
-  const match = /^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s.exec(dataUri);
+  const match = /^data:(image\/(?:jpeg|png|webp));base64,([\s\S]+)$/.exec(dataUri);
   if (!match) throw new Error('Uma das imagens não está em um formato compatível com a Tripo.');
 
   const mime = match[1];
