@@ -6,13 +6,13 @@ import type { CupModel, GeneratedArt, ArtTransformations } from '@/lib/types';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from './ui/button';
 import { ChevronDown, Download } from 'lucide-react';
-import { Label } from './ui/label';
-import { Slider } from './ui/slider';
 
 
 interface PreviewCardProps {
     cupModel: CupModel;
     art: GeneratedArt | null;
+    artTransformations: ArtTransformations;
+    setArtTransformations: React.Dispatch<React.SetStateAction<ArtTransformations>>;
     onScrollDown?: () => void;
     showScrollDownButton?: boolean;
     handleSaveArt: () => void;
@@ -21,19 +21,19 @@ interface PreviewCardProps {
 
 export function PreviewCard({ 
     cupModel, 
-    art, 
+    art,
+    artTransformations,
+    setArtTransformations,
     onScrollDown, 
     showScrollDownButton = true,
     handleSaveArt,
     isGenerating
 }: PreviewCardProps) {
-    
-    // Simplificado - a lógica de transformação será movida ou removida
-    const artTransformations: ArtTransformations = {
-        scale: [1, 0.5],
-        position: [0, 0.1],
-        rotation: 0,
-    };
+    // Keep the transformation props wired to this component so the parent can
+    // preserve the same edit state that is later used by the quote flow.
+    // The current simplified 3D preview does not expose transformation controls yet.
+    void artTransformations;
+    void setArtTransformations;
     
     return (
         <div className="relative">
@@ -46,12 +46,11 @@ export function PreviewCard({
                     <CupPreview3D 
                         cupModel={cupModel} 
                         art={art} 
-                        modelUrl={null} // O modelo vem do cupModel
+                        modelUrl={null}
                     />
                 </CardContent>
                  {art && (
                     <CardFooter className="flex-col items-start gap-4 p-4 pt-4 border-t">
-                        {/* A edição da arte foi simplificada/removida para o escopo atual */}
                         <div className="w-full pt-2">
                             <Button variant="outline" className="w-full" onClick={handleSaveArt} disabled={isGenerating || !art?.imageUrl || art.imageUrl.startsWith('data:image/gif')}>
                                 <Download className="mr-2 h-4 w-4" />
