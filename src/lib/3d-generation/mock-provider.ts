@@ -8,7 +8,7 @@ class MockGenerationProvider implements GenerationProvider {
   async createGenerationJob(input: ProductInput): Promise<GenerationJob> {
     const product: Product = { ...input, id: makeId('prod'), createdAt: new Date().toISOString() };
     store.products.set(product.id, product);
-    input.imageIds.forEach((id) => {
+    (input.imageIds || []).forEach((id) => {
       const image = store.images.get(id);
       if (image) store.images.set(id, { ...image, productId: product.id });
     });
@@ -53,4 +53,4 @@ class MockGenerationProvider implements GenerationProvider {
   }
 }
 
-export const generationProvider: GenerationProvider = new MockGenerationProvider();
+export const mockGenerationProvider: GenerationProvider = new MockGenerationProvider();
