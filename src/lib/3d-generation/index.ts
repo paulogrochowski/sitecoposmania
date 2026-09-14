@@ -1,3 +1,4 @@
+import { tripoGenerationProvider } from './tripo-provider';
 import { meshyGenerationProvider } from './meshy-provider';
 import { mockGenerationProvider } from './mock-provider';
 import type { ProductInput } from './types';
@@ -5,13 +6,15 @@ import type { ProductInput } from './types';
 /**
  * Application-facing generation service.
  *
- * Production uses Meshy when MESHY_API_KEY is available. The mock provider is
- * kept as a safe fallback so local development and preview deployments still
- * render the complete flow before credentials are configured.
+ * Prefer Tripo when TRIPO_API_KEY is configured because its API includes an
+ * introductory free-credit allowance. Meshy remains supported, and the mock
+ * provider keeps previews/local development working without credentials.
  */
-const generationProvider = process.env.MESHY_API_KEY
-  ? meshyGenerationProvider
-  : mockGenerationProvider;
+const generationProvider = process.env.TRIPO_API_KEY
+  ? tripoGenerationProvider
+  : process.env.MESHY_API_KEY
+    ? meshyGenerationProvider
+    : mockGenerationProvider;
 
 export function createGenerationJob(input: ProductInput) {
   return generationProvider.createGenerationJob(input);
