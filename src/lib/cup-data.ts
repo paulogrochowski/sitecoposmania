@@ -10,6 +10,13 @@ export const RIM_COLORS: Record<string, string> = {
   'Rosa Gold': '#b76e79',
 };
 
+export const ALL_RIMS: NonNullable<CupModel['rimColor']>[] = [
+  'Nenhuma',
+  'Dourado',
+  'Prata',
+  'Rosa Gold',
+];
+
 export const DEGRADE_COLORS = [
   'Nenhum',
   'Rosa',
@@ -44,7 +51,7 @@ const baseCup = {
 } satisfies Omit<CupModel, 'id' | 'opacityType' | 'rimColor'>;
 
 const opacityTypes: NonNullable<CupModel['opacityType']>[] = ['Fosco', 'Transparente'];
-const rimColors: NonNullable<CupModel['rimColor']>[] = ['Nenhuma', 'Dourado', 'Prata', 'Rosa Gold'];
+const rimColors: NonNullable<CupModel['rimColor']>[] = ALL_RIMS;
 
 export const CUP_CATALOG: CupModel[] = opacityTypes.flatMap((opacityType) =>
   rimColors.map((rimColor) => ({
