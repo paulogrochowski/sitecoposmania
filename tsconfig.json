@@ -9,7 +9,6 @@
     "moduleResolution": "node",
     "target": "es5",
     "downlevelIteration": true,
-    "ignoreDeprecations": "6.0",
     "strict": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
