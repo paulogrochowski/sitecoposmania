@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
-import { LogOut, ShoppingCart } from "lucide-react";
+import { Box, LogOut, ShoppingCart } from "lucide-react";
 import { PromotionalBanner } from "./promotional-banner";
 import { useIsAdmin } from "@/hooks/use-is-admin";
 import { useEffect, useState, type ReactNode } from "react";
@@ -69,6 +69,9 @@ export function Header({children}: {children: ReactNode}) {
                 </div>
               </Link>
               <nav className="hidden md:flex items-center gap-2">
+                <Button variant="ghost" asChild>
+                  <Link href="/gerar-3d"><Box className="mr-2 h-4 w-4" />Siviu 3D</Link>
+                </Button>
                 <Button variant="ghost" asChild>
                   <Link href="/">Início</Link>
                 </Button>

@@ -206,7 +206,12 @@ export default function CupPreview3D({ cupModel, art, modelUrl }: CupPreview3DPr
       .then(response => {
         const contentType = response.headers.get("content-type");
         // Check if the request was successful AND the content is not an HTML/XML error page
-        const isValid = response.ok && contentType && !contentType.includes('text/html') && !contentType.includes('application/xml');
+        const isValid = Boolean(
+          response.ok &&
+          contentType &&
+          !contentType.includes('text/html') &&
+          !contentType.includes('application/xml')
+        );
         setModelExists(isValid);
       })
       .catch(() => setModelExists(false));
